@@ -1,0 +1,137 @@
+
+- klasa jest szablonem konstrukcji obiektu.
+- Obiekty są instancjami klasy
+- Zmienne i metody są składowymi klasy
+- Sens wywolywania z maina innej klasy - teoretycznie moznaby wywolywac z wielu innych klas obiekty tej klasy.
+Nie bedzie tu koniecznosci np definiowania
+- Dwóch obiektów nie łączy nic poza przynależnoscią do tej samej klasy (np. suv i minivan w klasie vehicle).
+Każdy z nich ma własny zestaw zmiennych (choc takich samych jeżeli chodzi o sturkturę)
+- deklaracja referencji + utworzenie obiektu Vehicle (new)
+Vehicle minivan=new Vehicle();  <=to samo=> Vehicle.minivan;   minivan=new Vehicle();
+
+Vehicle.minivan;   --> deklaracja referencji do obiektu TYPU Vehicle || JESZCZE NIE JEST OBIEKTEM
+minivan=new Vehicle(); --> Utworzenie obiektu klasy Vehicle z przypisaną referencją do minivan
+
+Vehicle car1= new Vehicle();
+Vehicle car2=car1;
+Zmienne car1,car2 Referencje do tego samego obiektu (ale nie sa powiazane w inny sposob) analogicznie to
+String dowolny=dowolny2
+
+A Java String is an object of the class java. ... You can assign a string literal directly into a
+String variable, instead of calling the constructor to create a String instance.
+
+- metoda zawiera jedną lub więcej instrukcji (podprogram) -
+najlepiej jakby sama w sobie wykonywala jedno zadanie
+- main - metoda rozpoczynająca działanie programu. Ona będzie wywolywac nasze metody
+- postać metodyL typZwracany nazwa)lista parametrów {ciało metody} np int Matematyczna(int a, int b)
+- jeżeli metoda nie zwraca zadnych danych to typ-zwracany to void (np tylko wyswietla zmienne, nie korzystamy znich dalej)
+- metody służą do uzyskania dostępu do danych klasy i wykonania operacjy na tych danych
+- Zwrocenie wartosci metody - return
+- return w voidzie spowoduje zakonczenie metody np if (x==3) {return;} // koniec jezeli ystapi 3
+np for (int i=0;i>10;i++) { if (i==5) return; sout;} - wykona sie tylko od 0 do 5 bo dla = 5 powrot z metody
+Moze byc wiecej niz jedno return jeżeli wiecej rozgalezien
+- metody zwracajace wartosc ( np sqrt()) -> return wartosc (musi byc typ metody inny niz void)
+- wartosci przekazywane metodzie to argumenty, zmienne w metodzie (wewnatrz), które je otrzymują
+to parametry (deklarujemy je w () po nazwie metody)
+
+klasa vs obiekt - wzorzec, mysl o tym jak foremka do piasku i babki piaskowe
+
+- Konstruktor - inicjacja obiektu podczas tworzenia
+- ma taką samą nazwę jak klasa, nie mają typu zwracanego
+- zwykle nadaje wartosci poczatkowe zmiennym
+- zmienna = new nazwaKlasy (lista argumentow) <-- okreslenie konsturktora klasy
+- jezeli klas anie ma oknstruktora ot java korzystaz z domyslnego
+
+- MEtoda finalize() wywolywana przed odzyskaniem pamieci zajmowanej przez obiekt, któy zostanie usuniety
+protected void finalize() {}
+
+- this - >
+int xxx;
+PrzykladowyKonsturktor (int xxx) {
+ this.xxx=xxx; --> do xxx zadeklarowanego w klasie przypisujemy argument
+}
+
+- Obiekty klasy string np String  str1=new String("Cokolwiek");
+String str2="ddddddddddd";
+
+//Operacje na łancuchach
+- boolean equals(string) - zwracsa true jezeli lancuch dla którego zostala wywolana jest taki sam jak string
+
+w klasie powtorki sporo tego jest
+
+lancuchy sa niezmienne: jesli sie przypisze wartosc to powstaje nowy obiekt. Nieuzwane sa usuwane z pamieci
+
+
+//Modyfikatory dostępu
+- public - dostpena dla dowolnego kodu w programie w tym metod z innych klas
+- private - dosteplna dla skladowych tej samej klasy. Metody zdefiniowane w inncyh klasach nie maja dostepu
+- protected - (dziedziczenie - do uzupelnienia pozniej)
+- default (jesli brak powyzszych) - roznowazny z public chyba, ze kod został podzielony na pakiety.
+
+Pakiet: grupa klas
+
+Wykorzystanie obiektu jako parametru:
+
+
+Sterta vs stos -!
+Sytuacja przypisania nowej instancji obiektu do istniejącej zmiennej - przepiecie do innego miejsca na stercie
+(referencja do nowego obiektu, innego miejsca w pamieci)
+- sterta (heap space) - obiekty trzymane są na stercie. Miejsce na obiekty są rezerwowane (i ew zwalniane) w tej pamieci.
+- stos (stack) - zmienne trzymane są na stosie. Nie wszystkie zmienne wskazują na obiekty na stercie. Jeśli utworzysz
+zmienną lokalną (nie będącą atrybutem klasy) typu prostego (np. int czy double) wylądują one bezpośrednio na stosie
+
+Gettery i settery to metody
+- metody pobierające wartość atrybutu mają nazwę get typ zwracany odpowiada typowi atrybutu.
+Metoda nie przyjmuje żadnego parametru.
+Specyfikacja dopuszcza pewien wyjątek w nazwie jeśli atrybut jest typu boolean
+- metoda ustawiająca wartość atrybutu. Nową wartością jest parametr przekazany do tej metody.
+Nazwa metody musi pasować do wzorca set. Metoda musi przyjmować jeden parametr odpowiadający
+typowi atrybutu i nie może zwracać żadnej wartości.
+
+
+Klasy Zewnetrzne i wewnetrzne
+public class OuterClass {
+   public class InnerClass {
+   }
+
+   public InnerClass instantiate() {
+   return new InnerClass();
+   }
+}
+klasa wewnętrzna ma dostęp do wszystkich atrybutów czy metod klasy zewnętrznej, w której została zdefiniowana.
+Tworzenie instancji
+
+private static void innerClassInstantiation() {
+OuterClass outerClass=new OuterClass();
+OuterClass.InnerClass inst1=outerClass.instantiate(); //powstaje w wyniku wywołania metody instantiate z klasy OuterClass
+OuterClass.InnerClass inst2=outerClass.new InnerClass(); //tworzymy posługując się instancją klasy OuterClass
+}
+
+Static/Nonstatic ->
+domyślnie, wszystkie wewnętrzne interfejsy i typy wyliczeniowe są statyczne,
+modyfikator static jest przed nimi zbędny. Static aby wywolywac przed wywolaniem dowolnego obiektu klasy
+ (uruchomiona zanim powstana obiekty).Samodzielna składowa której możemy używać bez konkretnego obiektu
+        System.out.println(KoloniaKlasy.ZeStatic); //zadziala bo statyczna
+        System.out.println(KoloniaKlasy.wiek); //nie zadziala bo niestatyczna
+
+    int wiek;
+    static String ZeStatic="dupa ale statyczna";
+    tak samo mozna wywolywac metody (bez obiektu).
+    Zmienne static są poniekąd zmiennymi globalnymi, utworzenie obiektu nie powoduje powstania
+    kopii zmiennej static. Wszystkie obiekty klasy ją wspóldzielą (1:n). Zmiana jej wartosci
+    globalnie powoduje jej zmiane w każdym wykorzystaniu przez inne obiekty
+    non static są osobne dla kazdego obiektu np
+
+    xxx x=new xxx();
+    x.x1=liczba1
+    x.x2=liczba2
+
+
+Main jest static poniewaz musi zostac wywolana przez maszyne wirtualna javy w momencie
+uruchomienia programu
+Metody static moga bezposrednio wywolywac tylko inne metody static, bezposrednio uzywac
+tylko zmiennych skladowych static, nie maja referencji this
+
+
+https://www.samouczekprogramisty.pl/klasy-wewnetrzne-i-anonimowe-w-jezyku-java/
+//dalej 184 wiecej o metodach i klasach
